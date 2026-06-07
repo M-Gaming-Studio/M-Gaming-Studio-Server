@@ -1,0 +1,14 @@
+{
+    "name":"mgaming-server",
+    "cfengine":"lucee",
+    "datasources":{
+        "mgamingDS":{
+            "dbengine":"mysql",
+            "host":"127.0.0.1",
+            "port":"3306",
+            "database":"mgaming_studio",
+            "username":"root",
+            "password":""
+        }
+    }
+}
