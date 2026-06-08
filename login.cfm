@@ -3,6 +3,7 @@
     
     <cftry>
         <cfset mongoClient = MongoConnect("mgamingDS")>
+        <cfset mongoDB = mongoClient.getDB("mgaming_db")>
         <cfset usersCollection = mongoDB.getCollection("users")>
         
         <cfset searchFilter = {
