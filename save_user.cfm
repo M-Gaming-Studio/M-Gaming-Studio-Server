@@ -33,6 +33,6 @@
     <cflocation url="login.cfm?success=Compte créé avec succès ! Connectez-vous." addToken="false">
 
     <cfcatch type="any">
-        <cflocation url="inscription.cfm?error=Erreur serveur : #urlEncodedFormat(cfcatch.message)#" addToken="false">
+        <cflocation url="inscription.cfm?error=Erreur de base de données : #urlEncodedFormat(cfcatch.message)#" addToken="false">
     </cfcatch>
 </cftry>
