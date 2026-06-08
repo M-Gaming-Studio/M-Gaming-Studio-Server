@@ -2,25 +2,37 @@
     <cflocation url="inscription.cfm?error=Formulaire invalide" addToken="false">
 </cfif>
 
-<cfquery name="checkUser">
-    SELECT id FROM users 
-    WHERE username = <cfqueryparam value="#form.username#" cfsqltype="cf_sql_varchar">
-       OR email = <cfqueryparam value="#form.email#" cfsqltype="cf_sql_varchar">
-</cfquery>
+<cftry>
+    <cfset mongoDB = MongoRegister("ma_connexion_mongo")>
+    <cfset usersCollection = mongoDB.getCollection("users")>
+    
+    <cfset searchFilter = {
+        "$or": [
+            { "username": form.username },
+            { "email": form.email }
+        ]
+    }>
+    
+    <cfset checkUser = usersCollection.findOne(searchFilter)>
+    
+    <cfif not isNull(checkUser)>
+        <cflocation url="inscription.cfm?error=Le nom d'utilisateur ou l'email est déjà utilisé" addToken="false">
+    </cfif>
 
-<cfif checkUser.recordCount gt 0>
-    <cflocation url="inscription.cfm?error=Le nom d'utilisateur ou l'email est déjà utilisé" addToken="false">
-</cfif>
+    <cfset hashedPassword = hash(form.password, "SHA-512", "UTF-8")>
 
-<cfset hashedPassword = hash(form.password, "SHA-512", "UTF-8")>
+    <cfset newUser = {
+        "username": form.username,
+        "email": form.email,
+        "password": hashedPassword,
+        "created_at": now()
+    }>
+    
+    <cfset usersCollection.insertOne(newUser)>
 
-<cfquery name="insertUser">
-    INSERT INTO users (username, email, password)
-    VALUES (
-        <cfqueryparam value="#form.username#" cfsqltype="cf_sql_varchar">,
-        <cfqueryparam value="#form.email#" cfsqltype="cf_sql_varchar">,
-        <cfqueryparam value="#hashedPassword#" cfsqltype="cf_sql_varchar">
-    )
-</cfquery>
+    <cflocation url="login.cfm?success=Compte créé avec succès ! Connectez-vous." addToken="false">
 
-<cflocation url="login.cfm?success=Compte créé avec succès ! Connectez-vous." addToken="false">
+    <cfcatch type="any">
+        <cflocation url="inscription.cfm?error=Erreur serveur : #urlEncodedFormat(cfcatch.message)#" addToken="false">
+    </cfcatch>
+</cftry>
