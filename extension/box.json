@@ -1,0 +1,9 @@
+{
+    "name":"Lucee  CF Engine",
+    "version":"7.0.4+34",
+    "createPackageDirectory":false,
+    "slug":"lucee",
+    "shortDescription":"Lucee  WAR engine for CommandBox servers.",
+    "type":"cf-engines",
+    "JakartaEE":true
+}
