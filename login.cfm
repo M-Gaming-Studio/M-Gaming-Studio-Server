@@ -2,7 +2,7 @@
     <cfset hashedInputPassword = hash(form.password, "SHA-512", "UTF-8")>
     
     <cftry>
-        <cfset mongoDB = MongoRegister("mgamingDS")>
+        <cfset mongoClient = MongoConnect("mgamingDS")>
         <cfset usersCollection = mongoDB.getCollection("users")>
         
         <cfset searchFilter = {
