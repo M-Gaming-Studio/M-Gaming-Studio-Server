@@ -1,18 +1,30 @@
 <cfif structKeyExists(form, "username") and structKeyExists(form, "password")>
     <cfset hashedInputPassword = hash(form.password, "SHA-512", "UTF-8")>
-    <cfquery name="getUser">
-        SELECT id, username, password FROM users 
-        WHERE username = <cfqueryparam value="#form.username#" cfsqltype="cf_sql_varchar">
-          AND password = <cfqueryparam value="#hashedInputPassword#" cfsqltype="cf_sql_varchar">
-    </cfquery>
-    <cfif getUser.recordCount eq 1>
-        <cfset session.isLoggedIn = true>
-        <cfset session.user_id = getUser.id>
-        <cfset session.username = getUser.username>
-        <cflocation url="home.cfm" addToken="false">
-    <cfelse>
-        <cfset errorMessage = "Nom d'utilisateur ou mot de passe incorrect.">
-    </cfif>
+    
+    <cftry>
+        <cfset mongoDB = MongoRegister("ma_connexion_mongo")>
+        <cfset usersCollection = mongoDB.getCollection("users")>
+        
+        <cfset searchFilter = {
+            "username": form.username,
+            "password": hashedInputPassword
+        }>
+        
+        <cfset userData = usersCollection.findOne(searchFilter)>
+        
+        <cfif not isNull(userData)>
+            <cfset session.isLoggedIn = true>
+            <cfset session.user_id = userData["_id"].toString()>
+            <cfset session.username = userData["username"]>
+            <cflocation url="home.cfm" addToken="false">
+        <cfelse>
+            <cfset errorMessage = "Nom d'utilisateur ou mot de passe incorrect.">
+        </cfif>
+
+        <cfcatch type="any">
+            <cfset errorMessage = "Erreur de connexion à la base de données : #cfcatch.message#">
+        </cfcatch>
+    </cftry>
 </cfif>
 
 <!DOCTYPE html>
