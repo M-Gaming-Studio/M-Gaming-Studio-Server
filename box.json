@@ -1,0 +1,5 @@
+{
+    "dependencies":{
+        "lucee":"^7.0.4+34"
+    }
+}
