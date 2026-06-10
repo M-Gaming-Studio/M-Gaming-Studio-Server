@@ -5,11 +5,11 @@ component {
 
     // Local lists
 
-    local.dbHost = server.system.environment.DB_HOST ?: "127.0.0.1";
-    local.dbPort = server.system.environment.DB_PORT ?: "3306";
-    local.dbName = server.system.environment.DB_NAME ?: "mgaming_studio";
-    local.dbUser = server.system.environment.DB_USER ?: "root";
-    local.dbPass = server.system.environment.DB_PASS ?: "";
+    local.dbHost = server.system.environment.DB_HOST ?: "mysql-3ef7cd90-debouchony-d171.g.aivencloud.com";
+    local.dbPort = server.system.environment.DB_PORT ?: "27329";
+    local.dbName = server.system.environment.DB_NAME ?: "defaultdb";
+    local.dbUser = server.system.environment.DB_USER ?: "avnadmin";
+    local.dbPass = server.system.environment.DB_PASS ?: "AVNS_KI24TONUicH7VdrCTOT";
 
     this.datasources["mgamingDS"] = {
         class: "com.mysql.cj.jdbc.Driver",
