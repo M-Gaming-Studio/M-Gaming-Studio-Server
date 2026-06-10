@@ -2,34 +2,34 @@
     <cfset hashedInputPassword = hash(form.password, "SHA-512", "UTF-8")>
     
     <cftry>
-        <cfset mongoClient = MongoConnect("mgamingDS")>
-        <cfset mongoDB = mongoClient.getDB("connexion locale")>
-        <cfset usersCollection = mongoDB.getCollection("users")>
+    	
+        <!--- Aiven MySQL --->
+
+        <cfquery name = "getUser" datasource = "mgamingDS">
+            SELECT id, username, email        	
+            FROM users
+            WHERE username = <cfqueryparam value="#form.username#" cfsqltype="cf_sql_varchar">
+            AND password = <cfqueryparam value="#hashedInputPassword#" cfsqltype="cf_sql_varchar">
+        </cfquery>            	
         
-        <cfset searchFilter = {
-            "username": form.username,
-            "password": hashedInputPassword
-        }>
-        
-        <cfset userData = usersCollection.findOne(searchFilter)>
-        
-        <cfif not isNull(userData)>
-            <cfset session.isLoggedIn = true>
-            <cfset session.user_id = userData["_id"].toString()>
-            <cfset session.username = userData["username"]>
-            <cflocation url="home.cfm" addToken="false">
-        <cfelse>
+        <cfif getUser.recordCount eq 1>
+            <cfset session.isLoggedIn = true>        	
+            <cfset session.user_id = getUser.id>
+            <cfset session.username = getUser.username>
+            <cflocation url = "home.cfm" addToken = "false">
+        <cfelse>            	
             <cfset errorMessage = "Nom d'utilisateur ou mot de passe incorrect.">
         </cfif>
 
-        <cfcatch type="any">
+        <cfcatch type = "any">
             <cfset errorMessage = "Erreur de connexion à la base de données : #cfcatch.message#">
         </cfcatch>
+
     </cftry>
 </cfif>
 
 <!DOCTYPE html>
-<html lang="fr" class="bg-slate-950 text-slate-100">
+<html lang="fr" lass="bg-slate-950 text-slate-100">
 <head>
     <meta charset="UTF-8">
     <title>Connexion - M-Gaming-Studio Server</title>
@@ -132,4 +132,3 @@
     </script>
 
 </body>
-</html>
