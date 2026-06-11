@@ -3,8 +3,6 @@ component {
     this.sessionManagement = true;
     this.sessionTimeout = createTimeSpan(0, 0, 30, 0);
 
-    // Local lists
-
     local.dbHost = server.system.environment.DB_HOST ?: "mysql-3ef7cd90-debouchony-d171.g.aivencloud.com";
     local.dbPort = server.system.environment.DB_PORT ?: "27329";
     local.dbName = server.system.environment.DB_NAME ?: "defaultdb";
@@ -13,7 +11,7 @@ component {
 
     this.datasources["mgamingDS"] = {
         class: "com.mysql.cj.jdbc.Driver",
-        url: "jdbc:mysql://127.0.0.1:3306/mgaming_studio?useSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC",
+        url: "jdbc:mysql://#local.dbHost#:#local.dbPort#/#local.dbName#?useSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC",
         username: local.dbUser,
         password: local.dbPass
     };
