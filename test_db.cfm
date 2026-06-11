@@ -1,8 +1,20 @@
-<cfdump var="#application#">
-<cfdump var="#server.system.environment#">
+<cftry>
+    <cfquery name="testQuery" datasource="mgamingDS">
+        SELECT 1
+    </cfquery>
+    <cfoutput>✅ Connexion réussie !</cfoutput>
+    <cfcatch type="any">
+        <cfoutput>
+            ❌ Erreur : #cfcatch.message#<br>
+            Détail : #cfcatch.detail#<br>
+            Type : #cfcatch.type#
+        </cfoutput>
+    </cfcatch>
+</cftry>
+
 <cfoutput>
-    DB_HOST : #server.system.environment.DB_HOST ?: "non défini"#<br>
-    DB_PORT : #server.system.environment.DB_PORT ?: "non défini"#<br>
-    DB_NAME : #server.system.environment.DB_NAME ?: "non défini"#<br>
-    DB_USER : #server.system.environment.DB_USER ?: "non défini"#<br>
+    <br><br>
+    Driver : com.mysql.cj.jdbc.Driver<br>
+    URL : jdbc:mysql://mysql-3ef7cd90-debouchony-d171.g.aivencloud.com:27329/defaultdb<br>
+    <cfdump var="#application#">
 </cfoutput>
