@@ -3,14 +3,15 @@ component {
     this.sessionManagement = true;
     this.sessionTimeout = createTimeSpan(0, 0, 30, 0);
 
-    this.datasources["mgamingDS"] = {
-        class: "com.mysql.cj.jdbc.Driver",
-        url: "jdbc:mysql://mysql-3ef7cd90-debouchony-d171.g.aivencloud.com:27329/defaultdb?useSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC",
-        username: "avnadmin",
-        password: "#server.system.environment.DB_PASS#"
-    };
-
-    this.datasource = "mgamingDS";
+    public void function onApplicationStart() {
+        this.datasources["mgamingDS"] = {
+            class: "com.mysql.cj.jdbc.Driver",
+            url: "jdbc:mysql://mysql-3ef7cd90-debouchony-d171.g.aivencloud.com:27329/defaultdb?useSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC",
+            username: "avnadmin",
+            password: server.system.environment.DB_PASS ?: ""
+        };
+        this.datasource = "mgamingDS";
+    }
 
     public void function onSessionStart() {
         session.isLoggedIn = false;
