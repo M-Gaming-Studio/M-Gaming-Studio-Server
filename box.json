@@ -1,5 +1,6 @@
 {
-    "dependencies":{
-        "lucee":"^7.0.4+34"
+    "dependencies": {
+        "lucee": "^7.0.4+34",
+        "lucee-mysql": "any"
     }
 }
