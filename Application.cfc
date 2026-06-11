@@ -3,7 +3,7 @@ component {
     this.sessionManagement = true;
     this.sessionTimeout = createTimeSpan(0, 0, 30, 0);
 
-    local.dbHost = server.system.environment.DB_HOST ?: "mysql://avnadmin:AVNS_KI24TONUicH7VdrCTOT@mysql-3ef7cd90-debouchony-d171.g.aivencloud.com:27329/defaultdb?ssl-mode=REQUIRED";
+    local.dbHost = server.system.environment.DB_HOST ?: "mysql-3ef7cd90-debouchony-d171.g.aivencloud.com";
     local.dbPort = server.system.environment.DB_PORT ?: "27329";
     local.dbName = server.system.environment.DB_NAME ?: "defaultdb";
     local.dbUser = server.system.environment.DB_USER ?: "avnadmin";
