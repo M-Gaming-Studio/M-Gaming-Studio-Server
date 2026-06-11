@@ -3,13 +3,19 @@ component {
     this.sessionManagement = true;
     this.sessionTimeout = createTimeSpan(0, 0, 30, 0);
 
-    this.datasources = {
-        "mgamingDS" = {
-            class: "com.mysql.cj.jdbc.Driver",
-            url: "jdbc:mysql://mysql-3ef7cd90-debouchony-d171.g.aivencloud.com:27329/defaultdb?useSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC",
-            username: "avnadmin",
-            password: "AVNS_KI24TONUicH7VdrCTOT"
-        }
+    this.datasources["mgamingDS"] = {
+        type: "mysql",
+        host: "mysql-3ef7cd90-debouchony-d171.g.aivencloud.com",
+        port: 27329,
+        database: "defaultdb",
+        username: "avnadmin",
+        password: "AVNS_KI24TONUicH7VdrCTOT",
+        connectionLimit: 10,
+        blob: false,
+        clob: false,
+        connectionTimeout: 1,
+        timezone: "UTC",
+        custom: "useSSL=true&allowPublicKeyRetrieval=true"
     };
 
     this.datasource = "mgamingDS";
