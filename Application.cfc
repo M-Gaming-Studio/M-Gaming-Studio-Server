@@ -20,7 +20,7 @@ component {
 
     public boolean function onRequestStart(required string targetPage) {
         local.pageName = getFileFromPath(arguments.targetPage);
-        local.allowedPages = ["login.cfm", "inscription.cfm", "save_user.cfm", "privacy.cfm", "test.cfm"];
+        local.allowedPages = ["login.cfm", "inscription.cfm", "save_user.cfm", "privacy.cfm", "test_db.cfm"];
         if (session.isLoggedIn == false && !arrayFindNoCase(local.allowedPages, local.pageName)) {
             cflocation(url = "login.cfm", addtoken = false);
         }
