@@ -11,6 +11,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Bases de données - M-Gaming-Studio Server</title>
+
+    <cfinclude template="analytics.cfm">
 </head>
 <body class="min-h-screen antialiased">
 
