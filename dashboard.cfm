@@ -30,6 +30,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Tableau de Bord - M-Gaming-Studio Server</title>
+
+    <cfinclude template="analytics.cfm">
 </head>
 <body class="min-h-screen antialiased flex flex-col">
 
