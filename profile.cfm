@@ -11,6 +11,8 @@
     <title>Paramètres Profil - M-Gaming-Studio Server</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <cfinclude template="analytics.cfm">
 </head>
 <body class="min-h-screen antialiased bg-slate-950 text-slate-100">
 
