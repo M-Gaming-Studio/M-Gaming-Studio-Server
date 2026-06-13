@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Confidentialité - M-Gaming-Studio Server</title>
+
+    <cfinclude template="analytics.cfm">
 </head>
 <body class="min-h-screen flex flex-col justify-between antialiased bg-slate-950 text-slate-100">
 
