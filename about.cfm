@@ -22,16 +22,7 @@
     <meta charset="UTF-8">
     <title>A propos du Serveur - M-Gaming-Studio Server</title>
 
-    <!--- Google Analytics --->
-
-    <script async src = "https://www.googletagmanager.com/gtag/js?id=G-B3MP7KRWTE"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];    	
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-B3MP7KRWTE');
-    </script>
+    <cfinclude template="analytics.cfm">
 </head>
 <body class="min-h-screen flex flex-col justify-between antialiased bg-slate-950 text-slate-100">
 
